@@ -7,7 +7,7 @@ router.get("/", (req, res,next) => {
   models.docente.findAll({attributes: ["id","nombre","id_materia"],
       
       /////////se agrega la asociacion 
-      include:[{as:'materia-Relacionada', model:models.materia, attributes: ["id","nombre","id_carrera"]}]
+      include:[{as:'materia-Relacionada', model:models.materia, attributes: ["id","nombre"]}]
       ////////////////////////////////
 
     }).then(docentes => res.send(docentes)).catch(error => { return next(error)});
@@ -55,7 +55,7 @@ router.put("/:id", (req, res) => {
       .then(() => res.sendStatus(200))
       .catch(error => {
         if (error == "SequelizeUniqueConstraintError: Validation error") {
-          res.status(400).send('Bad request: existe otra docente con el mismo nombre')
+          res.status(400).send('Bad request: existe otro docente con el mismo nombre')
         }
         else {
           console.log(`Error al intentar actualizar la base de datos: ${error}`)

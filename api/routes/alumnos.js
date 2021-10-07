@@ -8,9 +8,7 @@ router.get("/", (req, res,next) => {
       
       /////////se agrega la asociacion 
       include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}]
-      
       ////////////////////////////////
-
 
     }).then(alumnos => res.send(alumnos)).catch(error => { return next(error)});
 });
@@ -19,7 +17,7 @@ router.get("/", (req, res,next) => {
 
 router.post("/", (req, res) => {
   models.alumno
-    .create({ nombre: req.body.nombre,id_carrera:req.body.id_carrera})
+    .create({ nombre: req.body.nombre,id_carrera:req.body.id_carrera })
     .then(alumno => res.status(201).send({ id: alumno.id }))
     .catch(error => {
       if (error == "SequelizeUniqueConstraintError: Validation error") {
@@ -57,7 +55,7 @@ router.put("/:id", (req, res) => {
       .then(() => res.sendStatus(200))
       .catch(error => {
         if (error == "SequelizeUniqueConstraintError: Validation error") {
-          res.status(400).send('Bad request: existe otro alumno con el mismo nombre')
+          res.status(400).send('Bad request: existe otra alumno con el mismo nombre')
         }
         else {
           console.log(`Error al intentar actualizar la base de datos: ${error}`)
