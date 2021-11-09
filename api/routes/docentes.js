@@ -4,7 +4,10 @@ var models = require("../models");
 
 router.get("/", (req, res,next) => {
 
-  models.docente.findAll({attributes: ["id","nombre","id_materia"],
+  models.docente.findAll({
+    offset:7, 
+    limit:7,
+    attributes: ["id","nombre","id_materia"],
       
       /////////se agrega la asociacion 
       include:[{as:'materia-Relacionada', model:models.materia, attributes: ["id","nombre"]}]

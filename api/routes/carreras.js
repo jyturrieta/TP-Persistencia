@@ -5,6 +5,8 @@ var models = require("../models");
 router.get("/", (req, res) => {
   models.carrera
     .findAll({
+      offset:10, 
+      limit:10,
       attributes: ["id", "nombre"]
     })
     .then(carreras => res.send(carreras))
