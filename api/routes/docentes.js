@@ -7,7 +7,7 @@ router.get("/", (req, res,next) => {
   const pagina = req.query.pagina
   models.docente.findAll({
     offset:cantidadAVer, 
-    limit:cantidadAVer,
+    limit:pagina,
     attributes: ["id","nombre","id_materia"],
       
       /////////se agrega la asociacion 
