@@ -3,10 +3,11 @@ var router = express.Router();
 var models = require("../models");
 
 router.get("/", (req, res,next) => {
-
+  const cantidadAVer = req.query.cantidadAVer
+  const pagina = req.query.pagina
   models.docente.findAll({
-    offset:7, 
-    limit:7,
+    offset:cantidadAVer, 
+    limit:cantidadAVer,
     attributes: ["id","nombre","id_materia"],
       
       /////////se agrega la asociacion 
