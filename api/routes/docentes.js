@@ -5,6 +5,7 @@ var models = require("../models");
 router.get("/", (req, res,next) => {
   const pagina = parseInt(req.query.pagina);
   const cantidadAVer = parseInt(req.query.cantidadAVer);
+  if(cantidadAVer){
   models.docente.findAll({attributes: ["id","nombre","id_materia"],
       
       /////////se agrega la asociacion 
@@ -13,7 +14,15 @@ router.get("/", (req, res,next) => {
       offset: (pagina - 1) * cantidadAVer, 
       limit: cantidadAVer 
     }).then(docentes => res.send(docentes)).catch(error => { return next(error)});
-});
+}else{
+  models.docente.findAll({attributes: ["id","nombre","id_materia"],
+      
+  /////////se agrega la asociacion 
+  include:[{as:'materia-Relacionada', model:models.materia, attributes: ["id","nombre"]}],
+  ////////////////////////////////
+  
+}).then(docentes => res.send(docentes)).catch(error => { return next(error)});
+}});
 
 
 

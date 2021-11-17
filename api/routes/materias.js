@@ -6,6 +6,7 @@ router.get("/", (req, res,next) => {
 
   const pagina = parseInt(req.query.pagina);
   const cantidadAVer = parseInt(req.query.cantidadAVer);
+  if(cantidadAVer){
   models.materia.findAll({attributes: ["id","nombre","id_carrera"],
       
       /////////se agrega la asociacion 
@@ -16,7 +17,15 @@ router.get("/", (req, res,next) => {
       ////////////////////////////////
 
     }).then(materias => res.send(materias)).catch(error => { return next(error)});
-});
+}else{
+  models.materia.findAll({attributes: ["id","nombre","id_carrera"],
+      
+      /////////se agrega la asociacion 
+      include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
+      ////////////////////////////////
+
+    }).then(materias => res.send(materias)).catch(error => { return next(error)});
+}});
 
 
 

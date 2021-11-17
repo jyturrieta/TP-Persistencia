@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   const pagina = parseInt(req.query.pagina);
   const cantidadAVer = parseInt(req.query.cantidadAVer);
 
-
+if(cantidadAVer){
   models.carrera
     .findAll({
       attributes: ["id", "nombre"],
@@ -16,7 +16,14 @@ router.get("/", (req, res) => {
     })
     .then(carreras => res.send(carreras))
     .catch(() => res.sendStatus(500));
-});
+}else{
+  models.carrera
+    .findAll({
+      attributes: ["id", "nombre"],
+    })
+    .then(carreras => res.send(carreras))
+    .catch(() => res.sendStatus(500));
+}});
 
 router.post("/", (req, res) => {
   models.carrera
