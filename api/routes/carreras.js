@@ -11,6 +11,7 @@ if(cantidadAVer){
   models.carrera
     .findAll({
       attributes: ["id", "nombre"],
+      include:[{as:'materia', model:models.materia, attributes: ["id","nombre","id_carrera"]}],
       offset: (pagina - 1) * cantidadAVer, 
       limit: cantidadAVer 
     })
@@ -20,6 +21,7 @@ if(cantidadAVer){
   models.carrera
     .findAll({
       attributes: ["id", "nombre"],
+      include:[{as:'materia', model:models.materia, attributes: ["id","nombre","id_carrera"]}]
     })
     .then(carreras => res.send(carreras))
     .catch(() => res.sendStatus(500));
