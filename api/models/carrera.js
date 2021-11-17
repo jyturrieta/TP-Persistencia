@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   
 
   
-  /*//codigo de asociacion  (tiene muchos:)
+  //codigo de asociacion  (tiene muchos:)
   carrera.associate = function(models) {
   	carrera.hasMany(
       models.materia,  // Modelo al que pertenece
@@ -15,8 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id_carrera'       // campo con el que voy a igualar 
       })
   };
-  ///////////////////////
-*/
+
 
   return carrera;
 };
